@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            blackjackgame
+        </title>
+        <style>
+            body,html{
+                height: 100%;
+            }
+            .imager{
+                display: inline;
+                height: 210px;
+                width: 110px;
+            }
+            body{
+                text-align: center;
+                background: linear-gradient(#6afcfa,#eba8e6);
+                background-size:cover;
+                height:max-content;
+                background-repeat: no-repeat;
+                color: #2d236d;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin:-15px;
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            .a{
+                width: 130px;
+                margin-top: 20px;
+                border-radius: 5px;
+                border: none;
+                background-color:  #294054;
+                color: rgb(239, 13, 175);
+                padding: 10px 0;
+                font-size:medium;
+                margin: 0px 15px;
+            }
+            .b{
+                margin: 10px 0;
+                font-weight:bold;
+            }
+          #t{
+            background-color:  #294054;
+                color: rgb(19, 234, 234);
+          }
+          .a:hover{
+            background-color: #1f3346;
+            width: 135px;
+            
+          }
+          h1{
+            font-family:'Courier New', Courier, monospace;
+            font-size: 60px;
+            color: #eba8e6;
+            text-shadow: 5px 5px #d6fae4;
+          }
+          .ranku{
+                height: 210px;
+                border:none;
+                border-radius: 15px;
+          }
+          .ager{
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+          }
+        </style>
+    </head>
+    <body >
+        <div class="container">
+        <h1><b>Black Jack</b></h1>
+        <h2 id="message"><b>want to play a round?</b></h2>
+        <div class="imager">
+            <img class="ranku"id="ab" src="">
+            <img class="ranku"id="bc" src="">
+            <img class="ranku"id="cd" src="">
+            <img class="ranku"id="de" src="">
+            <img class="ranku"id="ea" src="">
+        </div>
+        <p class="b" >cards:<font id="x"></font> </p><br>
+        <p class="b" >sum:<font id="y"></font></p><br>
+        <p id = "z"></p><div class="ager">
+        <button class="a" onclick="start()">Start Game</button>
+        <button class="a" id = "t" onclick="NewCard()">New card</button></div>
+        <p id="g"></p>
+        <a href="rules.html">learn to play</a></div>
+        <script >           
+let x = document.getElementById("x")
+let y = document.getElementById("y")
+let z = document.getElementById("z")
+let msg = ""
+let total =0
+let alive = false
+let cards =[]
+let crs = []
+function NewCard(){
+    if (total===0){
+        alert("you need to start the game first")
+    }
+    else if(total<21){
+        total = 0
+        cards = []
+        let nCard = getNewCard()
+        cards.push(nCard)
+        starter();
+    }
+    else{
+        alert("game over");
+    }
+}
+function starter(){
+    x.textContent = " "
+    y.textContent = " "
+    total = 0
+    crs = crs.concat(cards)
+    span()
+    for (let index = 0; index < crs.length; index++) {
+        x.textContent += crs[index]+' '
+        total+=crs[index] ;  
+    }
+    msg = messager()
+    y.innerText += total
+    z.innerText = msg
+}
+function getNewCard(){
+    let  p = Math.ceil(Math.random()*13)
+    if(p===1){
+        return 11
+    }
+    else if(p>10){
+        return 10
+    }
+    return p
+}
+function start(){
+    if(crs.length===0){
+        let fCard = getNewCard()
+        let sCard = getNewCard()
+        crs=[fCard,sCard]
+        span()
+        x.textContent += fCard+' '+sCard
+        total+=  fCard+sCard
+        msg = messager()
+        y.innerText += total
+        z.innerText = msg
+    }
+    else {
+        alert("refresh the browser to start a new game")
+    }
+}
+function span(){
+    let ab = document.getElementById("ab")
+    let bc = document.getElementById("bc")
+    let cd = document.getElementById("cd")
+    let de = document.getElementById("de")
+    let ea = document.getElementById("ea")
+    let ims = [ab,bc,cd,de,ea]
+    for (let i = 0; i < crs.length; i++) {
+    for (let j = 0; j < crs.length; j++) {
+    if(crs[i]===11){
+    ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Playing_card_spade_A.svg/1638px-Playing_card_spade_A.svg.png"
+    }
+    else {if(crs[i]===2){
+        ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Playing_card_spade_2.svg/1638px-Playing_card_spade_2.svg.png"
+        }
+        else {if(crs[i]===3){
+            ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Playing_card_spade_3.svg/1200px-Playing_card_spade_3.svg.png"
+            }
+            else {if(crs[i]===4){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Playing_card_spade_4.svg/1200px-Playing_card_spade_4.svg.png"
+                }
+                else {if(crs[i]===5){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Playing_card_spade_5.svg/1200px-Playing_card_spade_5.svg.png"
+                }
+                else {if(crs[i]===6){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Playing_card_spade_6.svg/1638px-Playing_card_spade_6.svg.png"
+                }
+                else {if(crs[i]===7){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Playing_card_spade_7.svg/1200px-Playing_card_spade_7.svg.png"
+                }
+                else {if(crs[i]===8){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Playing_card_spade_8.svg/1638px-Playing_card_spade_8.svg.png"
+                }
+                else {if(crs[i]===9){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Playing_card_spade_9.svg/1638px-Playing_card_spade_9.svg.png"
+                }
+                else if(crs[i]===10){
+                ims[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Playing_card_spade_10.svg/1200px-Playing_card_spade_10.svg.png"}
+        }}}}}}}}}}}
+function messager(){
+    if(total<21){
+            msg = "want to draw again?";
+        }
+        else {if(total === 21){
+            msg = "BLAKJACK"; }    
+            else{
+                msg = "Game Over! see you around !";
+            }}
+    return msg
+}
+        </script>
+    </body>
+</html>
